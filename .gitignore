@@ -1,2 +1,21 @@
-/target/
-/bin/
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+
+# Maven
+target/
+
+# Embedded Database
+datasource/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
