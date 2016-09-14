@@ -7,10 +7,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootResTfulApiTestSampleApplicationTests {
+public class SpringBootResTfulApiTestSampleApplicationTest {
 
 	@Test
 	public void contextLoads() {
+		SpringBootResTfulApiTestSampleApplication s = new SpringBootResTfulApiTestSampleApplication();
+		s.main(null);
 	}
 
 }
