@@ -1,5 +1,7 @@
 package com.example;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +13,7 @@ public class SpringBootResTfulApiTestSampleApplicationTest {
 
 	@Test
 	public void contextLoads() {
-		SpringBootResTfulApiTestSampleApplication s = new SpringBootResTfulApiTestSampleApplication();
-		s.main(null);
+		assertTrue(true);
 	}
 
 }
