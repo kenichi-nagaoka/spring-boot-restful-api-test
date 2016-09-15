@@ -7,9 +7,6 @@
 ### CI
 
 pushされたタイミングでTravis CIに連携され自動テストが走ります。
-
 テスト結果はBuild Statusとしてバッジに表示されます。
-
 更にテスト結果はCoverallsに連携されCoverage Statusとしてバッジに表示されます。
-
 最終的にSlackに通知が飛びます。
