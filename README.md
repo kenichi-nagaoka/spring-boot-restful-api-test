@@ -4,6 +4,8 @@
 
 ### SpringBoot-RESTful-API-TestSample
 
+yet
+
 ### CI
 
 pushされたタイミングでTravis CIに連携され自動テストが走ります。
