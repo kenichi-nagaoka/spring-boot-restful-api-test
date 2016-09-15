@@ -12,5 +12,5 @@ pushされたタイミングでTravis CIに連携され自動テストが走り�
 テスト結果はBuild Statusとしてバッジに表示されます。
 更にテスト結果はCoverallsに連携されCoverage Statusとしてバッジに表示されます。
 
-最終的にSlackに通知が飛びます。
+最終的にビルド結果がSlackに通知が飛びます。
 <img src="https://github.com/kenichi-nagaoka/spring-boot-restful-api-test/blob/feature-1/41.png">
