@@ -8,11 +8,11 @@ yet
 
 ### CI
 
-pushされたタイミングでTravis CI(https://travis-ci.org/)に連携され自動テストが走ります。
+pushされたタイミングで[Travis CI](https://travis-ci.org/)に連携され自動テストが走ります。
 <img src="https://github.com/kenichi-nagaoka/spring-boot-restful-api-test/blob/feature-1/33.png">
 
 テスト結果はBuild Statusとしてバッジに表示されます。
-更にテスト結果はCoveralls(https://coveralls.io/)に連携されCoverage Statusとしてバッジに表示されます。
+更にテスト結果は[Coveralls](https://coveralls.io/)に連携されCoverage Statusとしてバッジに表示されます。
 
 最終的にビルド結果の通知がSlackに飛びます。
 <img src="https://github.com/kenichi-nagaoka/spring-boot-restful-api-test/blob/feature-1/41.png">
