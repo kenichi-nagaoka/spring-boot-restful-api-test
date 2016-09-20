@@ -1,0 +1,1 @@
+INSERT INTO customers(name, zip_code, address, phone_number, sex) VALUES('‰ïˆõ1', '1000001', '“Œ‹“sVh‹æ', '09000000000', '0');
