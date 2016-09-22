@@ -1,5 +1,0 @@
-language: java
-jdk:
-  - oraclejdk8
-notifications:
-  slack: arsware:gL807CfKHkUc6xN3HFW8JwZY
