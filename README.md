@@ -2,9 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/kenichi-nagaoka/spring-boot-restful-api-test.svg?style=shield)](https://circleci.com/gh/kenichi-nagaoka/spring-boot-restful-api-test)
 
-[![Test Coverage](https://codeclimate.com/github/kenichi-nagaoka/spring-boot-restful-api-test/badges/coverage.svg)](https://codeclimate.com/github/kenichi-nagaoka/spring-boot-restful-api-test/coverage)
+[![codecov](https://codecov.io/gh/kenichi-nagaoka/spring-boot-restful-api-test/branch/master/graph/badge.svg)](https://codecov.io/gh/kenichi-nagaoka/spring-boot-restful-api-test)
 
-[![Coverage Status](https://coveralls.io/repos/github/kenichi-nagaoka/spring-boot-restful-api-test/badge.svg?branch=master)](https://coveralls.io/github/kenichi-nagaoka/spring-boot-restful-api-test?branch=master)
 
 ### SpringBoot-RESTful-API-TestSample
 
