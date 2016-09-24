@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Customer {
 
 	/*
-	 * JPA‚Ìd—lãAƒGƒ“ƒeƒBƒeƒBƒNƒ‰ƒX‚Íˆø”‚Ì‚È‚¢ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ª•K—v
+	 * JPAã®ä»•æ§˜ä¸Šã€å¼•æ•°ãªã—ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãŒå¿…è¦
 	 */
 	public Customer() {
 	}
