@@ -10,6 +10,7 @@
 
 # Maven
 target/
+tmp/
 
 # Embedded Database
 datasource/
