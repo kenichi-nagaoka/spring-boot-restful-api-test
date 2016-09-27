@@ -1,4 +1,4 @@
-package com.exapmle;
+package com.example;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;

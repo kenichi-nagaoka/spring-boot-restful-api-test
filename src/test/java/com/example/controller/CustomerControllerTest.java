@@ -10,8 +10,8 @@ import java.util.Arrays;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
+import com.example.TestCaseBase;
 import com.example.domain.entity.Customer;
-import com.exapmle.TestCaseBase;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

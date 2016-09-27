@@ -6,8 +6,8 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
+import com.example.TestCaseBase;
 import com.example.enums.ErrorSet;
-import com.exapmle.TestCaseBase;
 
 import io.restassured.http.ContentType;
 
