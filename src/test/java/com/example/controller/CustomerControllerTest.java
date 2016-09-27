@@ -3,40 +3,26 @@ package com.example.controller;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.domain.entity.Customer;
-import com.example.domain.repository.CustomerRepository;
+import com.exapmle.TestCaseBase;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CustomerControllerTest {
+public class CustomerControllerTest extends TestCaseBase {
 
-	@LocalServerPort
-	int port;
+	private Customer customer1;
+	private Customer customer2;
 
-	@Autowired
-	CustomerRepository customerRepository;
-
-	Customer customer1;
-	Customer customer2;
-
-	@Before
-	public void setUp() {
+	@Override
+	public void setUpDetail() {
 
 		customerRepository.deleteAll();
 
@@ -55,7 +41,6 @@ public class CustomerControllerTest {
 		customer2.setSex("1");
 
 		customerRepository.save(Arrays.asList(customer1, customer2));
-		RestAssured.port = this.port;
 	}
 
 	@Test
@@ -93,13 +78,16 @@ public class CustomerControllerTest {
 		customer3.setPhoneNumber("09000000002");
 		customer3.setSex("0");
 		
-		given().body(customer3)
-			.contentType(ContentType.JSON)
-			.and()
-			.when().post("/customers")
-			.then()
-			.statusCode(HttpStatus.CREATED.value());
-			//.body(); ResponseBodyが空の検証を追加する
+		Response response = given().body(customer3)
+								.contentType(ContentType.JSON)
+								.and()
+								.when().post("/customers")
+								.then()
+								.statusCode(HttpStatus.CREATED.value())
+								.extract()
+								.response();
+		
+		assertThat(response.getBody().asString(), is(""));
 			
 		when().get("/customers")
 			.then()
