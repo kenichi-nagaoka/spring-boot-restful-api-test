@@ -3,6 +3,6 @@ machine:
     version: openjdk8
 test:
   override:
-    - mvn test
+    - mvn test jacoco:report
   post:
     - bash <(curl -s https://codecov.io/bash)
