@@ -5,4 +5,7 @@ test:
   override:
     - mvn test jacoco:report
   post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - cp -r ./target/site/* $CIRCLE_TEST_REPORTS/
     - bash <(curl -s https://codecov.io/bash)
