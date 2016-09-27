@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import java.util.Arrays;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,6 +79,11 @@ public class CustomerControllerTest {
 	}
 	
 	@Test
+	public void testGetCustomer() {
+		assertGetCustomer();
+	}
+	
+	@Test
 	public void testCreateCustomer() {
 		
 		Customer customer3 = new Customer();
@@ -98,5 +104,48 @@ public class CustomerControllerTest {
 		when().get("/customers")
 			.then()
 			.body("contents.size()", is(3));
+	}
+	
+	@Test
+	public void testUpdateCustomer() {
+
+		customer1.setName("UpdateUser");
+		customer1.setZipCode("1000003");
+		customer1.setAddress("東京都練馬区");
+		customer1.setPhoneNumber("09000000003");
+		customer1.setSex("1");
+		
+		given().body(customer1)
+			.contentType(ContentType.JSON)
+			.and()
+			.when().put("/customers/{id}", customer1.getId())
+			.then()
+			.statusCode(HttpStatus.CREATED.value());
+		
+		assertGetCustomer();
+	}
+	
+	@Test
+	public void testDeleteCustomer() {
+		
+		when().delete("customers/{id}", customer1.getId())
+			.then()
+			.statusCode(HttpStatus.NO_CONTENT.value());
+		
+		when().get("customers").then()
+			.statusCode(HttpStatus.OK.value())
+			.body("contents.size()", is(1));
+	}
+	
+	private void assertGetCustomer() {
+		when().get("/customers/{id}", customer1.getId())
+			.then()
+			.statusCode(HttpStatus.OK.value())
+			.body("id", is(customer1.getId()))
+			.body("name", is(customer1.getName()))
+			.body("zipCode", is(customer1.getZipCode()))
+			.body("address", is(customer1.getAddress()))
+			.body("phoneNumber", is(customer1.getPhoneNumber()))
+			.body("sex", is(customer1.getSex()));
 	}
 }
