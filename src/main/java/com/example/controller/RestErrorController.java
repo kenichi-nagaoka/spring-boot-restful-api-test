@@ -32,7 +32,7 @@ public class RestErrorController implements ErrorController {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@GetMapping(path = "error")
 	@ResponseBody
-	public HashMap<String, Object> notFoundError(HttpServletRequest request, HttpServletResponse response) {
+	public HashMap<String, Object> handleNotFoundError(HttpServletRequest request, HttpServletResponse response) {
 		return new HashMap<String, Object>() {
 			{
 				this.put("code", ErrorSet.NOT_FOUNT.getCode());
