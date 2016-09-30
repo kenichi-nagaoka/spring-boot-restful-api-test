@@ -24,7 +24,7 @@ public class ExceptionHandlerAspectTest extends TestCaseBase {
 			.then()
 			.statusCode(HttpStatus.METHOD_NOT_ALLOWED.value())
 			.contentType(ContentType.JSON)
-			.body("message", is(ErrorSet.METHOD_TYPE_ERROR.getMessage()))
-			.body("code", is(ErrorSet.METHOD_TYPE_ERROR.getCode()));
+			.body("message", is(ErrorSet.METHOD_NOT_ALLOWED.getMessage()))
+			.body("code", is(ErrorSet.METHOD_NOT_ALLOWED.getCode()));
 	}
 }
