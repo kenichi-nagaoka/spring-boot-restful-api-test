@@ -1,7 +1,5 @@
 package com.example.aop;
 
-import java.util.HashMap;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.enums.ErrorSet;
+import com.example.exception.ValidateException;
+import com.example.response.ErrorResponse;
 
 /**
  * 例外発生時のAdviceをまとめたAspectクラスです。
@@ -26,35 +26,40 @@ public class ExceptionHandlerAspect {
 	 * 
 	 * @return エラーレスポンス
 	 */
-	@SuppressWarnings("serial")
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
 	@ResponseBody
-	public HashMap<String, Object> handleMethodTypeError() {
-
-		return new HashMap<String, Object>() {
-			{
-				this.put("code", ErrorSet.METHOD_NOT_ALLOWED.getCode());
-				this.put("message", ErrorSet.METHOD_NOT_ALLOWED.getMessage());
-			}
-		};
+	public ErrorResponse handleMethodTypeError() {
+		return createErrorResponse(new ErrorResponse(), ErrorSet.METHOD_NOT_ALLOWED);
 	}
-	
+
+	/**
+	 * バリデーションエラーハンドリング
+	 * 
+	 * @return エラーレスポンス
+	 */
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ ValidateException.class })
+	@ResponseBody
+	public ErrorResponse handleValidationError(ValidateException e) {
+		return createErrorResponse(e.getErrorResponse(), ErrorSet.PARAMETER_INVALID);
+	}
+
 	/**
 	 * 既にリソースが削除されている際のエラーハンドリング
 	 * 
 	 * @return エラーレスポンス
 	 */
-	@SuppressWarnings("serial")
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
 	@ResponseBody
-	public HashMap<String, Object> handleResourceAlreadyDeleted() {
-		return new HashMap<String, Object>() {
-			{
-				this.put("code", ErrorSet.RESOURCE_ALREADY_DELETED.getCode());
-				this.put("message", ErrorSet.RESOURCE_ALREADY_DELETED.getMessage());
-			}
-		};
+	public ErrorResponse handleResourceAlreadyDeleted() {
+		return createErrorResponse(new ErrorResponse(), ErrorSet.RESOURCE_ALREADY_DELETED);
+	}
+
+	private ErrorResponse createErrorResponse(ErrorResponse errorResponse, ErrorSet errorSet) {
+		errorResponse.setCode(errorSet.getCode());
+		errorResponse.setMessage(errorSet.getMessage());
+		return errorResponse;
 	}
 }
