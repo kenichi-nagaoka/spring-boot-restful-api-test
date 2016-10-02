@@ -1,1 +1,1 @@
-INSERT INTO customers(name, zip_code, address, phone_number, sex) VALUES('会員1', '1000001', '東京都新宿区', '09000000000', '0');
+INSERT INTO customer(name, zip_code, address, phone_number, sex) VALUES('会員1', '1000001', '東京都新宿区', '09000000000', '0');

@@ -1,9 +1,8 @@
 package com.example.domain.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.Customer;
@@ -15,8 +14,8 @@ public class CustomerService {
 	@Autowired
 	CustomerRepository customerRepository;
 
-	public List<Customer> findAll() {
-		return customerRepository.findAll(new Sort("id"));
+	public Page<Customer> findAll(Pageable pageable) {
+		return customerRepository.findAllOrderById(pageable);
 	}
 
 	public Customer findOne(Integer id) {
