@@ -47,20 +47,33 @@ public class CustomerControllerTest extends TestCaseBase {
 	public void testGetCustomers() {
 		when().get("/customers")
 			.then()
-			.body("contents.size()", is(2))
+//			.body("contents.size()", is(2))
+			.body("numberOfElements", is(2))
 			.statusCode(HttpStatus.OK.value())
-			.body("id[0]", is(customer1.getId()))
-			.body("name[0]", is(customer1.getName()))
-			.body("zipCode[0]", is(customer1.getZipCode()))
-			.body("address[0]", is(customer1.getAddress()))
-			.body("phoneNumber[0]", is(customer1.getPhoneNumber()))
-			.body("sex[0]", is(customer1.getSex()))
-			.body("id[1]", is(customer2.getId()))
-			.body("name[1]", is(customer2.getName()))
-			.body("zipCode[1]", is(customer2.getZipCode()))
-			.body("address[1]", is(customer2.getAddress()))
-			.body("phoneNumber[1]", is(customer2.getPhoneNumber()))
-			.body("sex[1]", is(customer2.getSex()));
+//			.body("id[0]", is(customer1.getId()))
+//			.body("name[0]", is(customer1.getName()))
+//			.body("zipCode[0]", is(customer1.getZipCode()))
+//			.body("address[0]", is(customer1.getAddress()))
+//			.body("phoneNumber[0]", is(customer1.getPhoneNumber()))
+//			.body("sex[0]", is(customer1.getSex()))
+//			.body("id[1]", is(customer2.getId()))
+//			.body("name[1]", is(customer2.getName()))
+//			.body("zipCode[1]", is(customer2.getZipCode()))
+//			.body("address[1]", is(customer2.getAddress()))
+//			.body("phoneNumber[1]", is(customer2.getPhoneNumber()))
+//			.body("sex[1]", is(customer2.getSex()));
+			.body("content[0].id", is(customer1.getId()))
+			.body("content[0].name", is(customer1.getName()))
+			.body("content[0].zipCode", is(customer1.getZipCode()))
+			.body("content[0].address", is(customer1.getAddress()))
+			.body("content[0].phoneNumber", is(customer1.getPhoneNumber()))
+			.body("content[0].sex", is(customer1.getSex()))
+			.body("content[1].id", is(customer2.getId()))
+			.body("content[1].name", is(customer2.getName()))
+			.body("content[1].zipCode", is(customer2.getZipCode()))
+			.body("content[1].address", is(customer2.getAddress()))
+			.body("content[1].phoneNumber", is(customer2.getPhoneNumber()))
+			.body("content[1].sex", is(customer2.getSex()));
 	}
 	
 	@Test
@@ -91,7 +104,8 @@ public class CustomerControllerTest extends TestCaseBase {
 			
 		when().get("/customers")
 			.then()
-			.body("contents.size()", is(3));
+			//.body("contents.size()", is(3));
+			.body("numberOfElements", is(3));
 	}
 	
 	@Test
@@ -122,7 +136,8 @@ public class CustomerControllerTest extends TestCaseBase {
 		
 		when().get("customers").then()
 			.statusCode(HttpStatus.OK.value())
-			.body("contents.size()", is(1));
+			//.body("contents.size()", is(1));
+			.body("numberOfElements", is(1));
 	}
 	
 	private void assertGetCustomer() {
