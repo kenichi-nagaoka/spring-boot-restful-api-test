@@ -1,7 +1,7 @@
 [![CircleCI](https://circleci.com/gh/kenichi-nagaoka/spring-boot-restful-api-test.svg?style=shield)](https://circleci.com/gh/kenichi-nagaoka/spring-boot-restful-api-test)
 
 [![codecov](https://codecov.io/gh/kenichi-nagaoka/spring-boot-restful-api-test/branch/master/graph/badge.svg)](https://codecov.io/gh/kenichi-nagaoka/spring-boot-restful-api-test)
-a
+
 ### SpringBoot-RESTful-API-TestSample
 
 yet.....
