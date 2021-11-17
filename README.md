@@ -6,7 +6,7 @@
 
 yet.....
 
-### CI
+### CI 
 
 pushされたタイミングで[Circle CI](https://circleci.com/gh/kenichi-nagaoka/spring-boot-restful-api-test)に連携され自動テストが走ります。
 <img src="https://github.com/kenichi-nagaoka/spring-boot-restful-api-test/blob/feature-1/2.png">
