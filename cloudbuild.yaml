@@ -4,5 +4,5 @@
    args: ['package']
 artifacts:
   objects:
-    location: 'gs://mybucket-nk/'
+    location: 'gs://mybucket-nk'
     paths: ['/workspace/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar']
