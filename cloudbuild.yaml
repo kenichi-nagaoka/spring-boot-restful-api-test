@@ -1,8 +1,8 @@
- steps:
- - name: maven:3-jdk-8
-   entrypoint: mvn
-   args: ['package']
+steps:
+- name: maven:3-jdk-8
+  entrypoint: mvn
+  args: ['package']
 artifacts:
-  objects:
-    location: 'gs://mybucket-nk/'
-    paths: ['/workspace/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar']
+ objects:
+  location: 'gs://mybucket-nk/'
+  paths: ['/workspace/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar']
