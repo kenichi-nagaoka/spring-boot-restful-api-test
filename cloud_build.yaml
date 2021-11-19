@@ -5,7 +5,3 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ["app", "deploy", "src/main/appengine/app.yaml"]
 timeout: "1600s"
-artifacts:
- objects:
-  location: 'gs://mybucket-nk/'
-  paths: ['/workspace/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar']
