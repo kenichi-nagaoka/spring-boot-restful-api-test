@@ -1,5 +1,7 @@
 steps:
+- name: maven:3-jdk-8
+  entrypoint: mvn
+  args: ['package']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args: ['-c', 'gcloud config set project phrasal-vent-332015 && gcloud app deploy src/main/appengine/app.yaml']
-  dir: 'target'
