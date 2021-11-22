@@ -4,4 +4,4 @@ steps:
   args: ['package']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'gcloud config set project phrasal-vent-332015 && gcloud app deploy src/main/appengine/app.yaml']
+  args: ['-c', 'gcloud config set project phrasal-vent-332015 && gcloud app deploy src/lmain/appengine/app.yaml']
