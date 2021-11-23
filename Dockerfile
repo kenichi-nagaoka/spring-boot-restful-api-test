@@ -15,7 +15,7 @@ RUN mvn package -DskipTests
 FROM openjdk:8-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/hellSpring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
+COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
 # Run the web service on container startup.
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
