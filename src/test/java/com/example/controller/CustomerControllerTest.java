@@ -62,7 +62,7 @@ public class CustomerControllerTest extends TestCaseBase {
 //			.body("address[1]", is(customer2.getAddress()))
 //			.body("phoneNumber[1]", is(customer2.getPhoneNumber()))
 //			.body("sex[1]", is(customer2.getSex()));
-			.body("content[0].id", is(customer1.getName()))
+			.body("content[0].id", is(customer1.getId()))
 			.body("content[0].name", is(customer1.getName()))
 			.body("content[0].zipCode", is(customer1.getZipCode()))
 			.body("content[0].address", is(customer1.getAddress()))
