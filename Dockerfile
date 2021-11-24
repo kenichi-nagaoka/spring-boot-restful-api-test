@@ -1,5 +1,5 @@
 # Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
-FROM maven:3.5-jdk-8-alpine as builder
+FROM maven:3.5-jdk-8-alpine AS builder
 
 # Copy local code to the container image.
 WORKDIR /app
@@ -12,10 +12,10 @@ RUN mvn package
 # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
 # https://hub.docker.com/_/openjdk
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-#FROM openjdk:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
-#COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
+COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
 # Run the web service on container startup.
-#CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]

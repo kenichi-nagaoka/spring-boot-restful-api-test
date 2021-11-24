@@ -6,15 +6,15 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA']
 # Deploy container image to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args:
-  - 'run'
-  - 'deploy'
-  - 'spring-boot-restful-api-test'
-  - '--image'
-  - 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA'
-  - '--region'
-  - 'asia-northeast1'
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args:
+#  - 'run'
+#  - 'deploy'
+#  - 'spring-boot-restful-api-test'
+#  - '--image'
+#  - 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA'
+#  - '--region'
+#  - 'asia-northeast1'
 images:
 - 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA'
