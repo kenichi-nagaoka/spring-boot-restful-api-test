@@ -1,21 +1,18 @@
-# Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
+# Spring BootアプリをビルドするためMaven/Java8のDockerイメージを利用
 FROM maven:3.5-jdk-8-alpine AS builder
 
-# Copy local code to the container image.
+# ビルド時のワークディレクトリの設定
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Build a release artifact.
+# Maven packageでビルドとテストを実行し成果物(jarファイル)を作成
 RUN mvn package
 
-# Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-# https://hub.docker.com/_/openjdk
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+# Spring Bootアプリの実行環境にopenjdk:8-jre-alpineを利用
 FROM openjdk:8-jre-alpine
 
-# Copy the jar to the production image from the builder stage.
 COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
-# Run the web service on container startup.
+# Docker Run時にjavaコマンドでSpring Bootを起動(Embedded Tomcatを起動)
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]

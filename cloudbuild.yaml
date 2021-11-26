@@ -1,11 +1,11 @@
 steps:
-# Build the container image
+# Dockerイメージの作成
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA', '.']
-# Push the container image to Container Registry
+# DockerイメージをContainer RegistryへPush
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/spring-boot-restful-api-test:$COMMIT_SHA']
-# Deploy container image to Cloud Run
+# Clourd RunへDockerイメージをデプロイ
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args:
