@@ -7,12 +7,16 @@ pipeline {
       } 
     }
     stage('SCM') {
-      checkout scm
+      steps {
+        checkout scm
+      }
     }
     stage('SonarQube Analysis') {
-      def mvn = tool 'Default Maven';
-      withSonarQubeEnv() {
-        sh "${mvn}/bin/mvn clean verify sonar:sonar"
+      steps {
+        def mvn = tool 'Default Maven';
+        withSonarQubeEnv() {
+          sh "${mvn}/bin/mvn clean verify sonar:sonar"        
+        }
       }
     }
   }
