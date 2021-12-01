@@ -15,7 +15,7 @@ pipeline {
       steps {
         echo 'Hello Sonar'
         script {
-          def mvn = tool 'Default Maven'
+          def mvn = tool 'My Maven'
           withSonarQubeEnv() {
             sh "${mvn}/bin/mvn clean verify sonar:sonar"
           }
