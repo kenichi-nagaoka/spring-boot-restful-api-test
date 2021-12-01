@@ -13,9 +13,12 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
-        def mvn = tool 'Default Maven'
-        withSonarQubeEnv() {
-          sh "${mvn}/bin/mvn clean verify sonar:sonar"        
+        echo 'Hello Sonar'
+        script {
+          def mvn = tool 'Default Maven'
+          withSonarQubeEnv() {
+            sh "${mvn}/bin/mvn clean verify sonar:sonar"
+          }
         }
       }
     }
