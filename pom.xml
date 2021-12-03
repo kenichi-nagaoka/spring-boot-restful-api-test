@@ -24,6 +24,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<sonar.projectKey>Sample-for-CICD</sonar.projectKey>
+		<sonar.login>9ed7e97ac27d316da3e0a7f7351394f988f6a27d</sonar.login>
 	</properties>
 
 	<dependencies>
