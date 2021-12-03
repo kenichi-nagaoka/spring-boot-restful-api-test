@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage ('build') {
-      steps {
-        sh 'mvn clean package'
-      } 
-    }
     stage('SCM') {
       steps {
         checkout scm
@@ -13,7 +8,6 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
-        echo 'Hello Sonar'
         script {
           def mvn = tool 'My Maven'
           withSonarQubeEnv() {
@@ -21,6 +15,11 @@ pipeline {
           }
         }
       }
+    }
+    stage ('build') {
+      steps {
+        sh 'mvn clean package'
+      } 
     }
   }
 }
