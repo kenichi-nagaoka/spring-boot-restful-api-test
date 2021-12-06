@@ -6,15 +6,16 @@ pipeline {
         script {
           def mvn = tool 'My Maven'
           withSonarQubeEnv() {
-            sh "${mvn}/bin/mvn clean verify sonar:sonar"
+            sh "${mvn}/bin/mvn sonar:sonar"
           }
         }
       }
     }
-    stage ('build') {
+    stage ('Build') {
       steps {
         sh 'mvn clean package'
-      } 
+      }
+    // gcloudコマンドでデプロイ、Cloud BuildのWebhookイベント用のURLへPOSTする形にする。Cloud Build側で新しいトリガーを作成しておく
     }
   }
 }
