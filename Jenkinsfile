@@ -21,6 +21,5 @@ pipeline {
         //sh 'mvn clean package'
       //}
     // gcloudコマンドでデプロイ、Cloud BuildのWebhookイベント用のURLへPOSTする形にする。Cloud Build側で新しいトリガーを作成しておく
-    }
   }
 }
