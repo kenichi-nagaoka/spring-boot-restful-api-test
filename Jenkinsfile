@@ -15,17 +15,17 @@ pipeline {
       steps {
         sh "mvn package"
       }
-      POST {
-        ALWAYS {
-          script {
-            allure([
-              includeProperties: false,
-              jdk: '',
-              properties: [],
-              reportBuildPolicy: 'ALWAYS',
-              results: [[path: 'target/allure-results']]
-            ])
-          }
+    }
+    POST {
+      ALWAYS {
+        script {
+          allure([
+            includeProperties: false,
+            jdk: '',
+            properties: [],
+            reportBuildPolicy: 'ALWAYS',
+            results: [[path: 'target/allure-results']]
+          ])
         }
       }
     }
