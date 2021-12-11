@@ -6,12 +6,11 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Maven packageでビルドとテストを実行し成果物(jarファイル)を作成
-RUN mvn package
+# 成果物(jarファイル)を作成(CompileとTestはJenkinsで行うためSkip)
+RUN mvn package -Dmaven.test.skip
 
 # Spring Bootアプリの実行環境にopenjdk:8-jre-alpineを利用
 FROM openjdk:8-jre-alpine
-
 
 COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
