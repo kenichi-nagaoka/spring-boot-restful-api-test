@@ -11,7 +11,7 @@ RUN mvn package -Dmaven.test.skip
 # Spring Bootアプリの実行環境にopenjdk:8-jre-alpineを利用
 FROM openjdk:8-jre-alpine
 
-COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
+#COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
 # Docker Run時にjavaコマンドでSpring Bootを起動(Embedded Tomcatを起動)
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
