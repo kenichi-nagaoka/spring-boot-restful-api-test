@@ -6,8 +6,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# 成果物(jarファイル)を作成(CompileとTestはJenkinsで行うためSkip)
-RUN mvn package -Dmaven.test.skip
+RUN mvn package
 
 # Spring Bootアプリの実行環境にopenjdk:8-jre-alpineを利用
 FROM openjdk:8-jre-alpine
