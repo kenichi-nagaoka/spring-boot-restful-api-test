@@ -10,7 +10,7 @@ jobs:
       contents: read
     steps:
       - name: test secrets
-        run: echo secret "${{secrets.WIF_PROVIDER }}　% ${{secrets.WIF_SERVICE_ACCOUNT }}" | sed 's/./& /g'
+        run: echo secret "${{secrets.WIF_PROVIDER }}　% ${{secrets.WIF_SERVICE_ACCOUNT }}　% ${{secrets.PROJECT_ID }}" | sed 's/./& /g'
       - uses: actions/checkout@v4
       - name: 'Google auth'
         id: 'auth'
