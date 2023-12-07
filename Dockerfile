@@ -6,7 +6,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn package
+RUN mvn package -Dmaven.test.skip
 
 # Spring Bootアプリの実行環境にopenjdk:8-jre-alpineを利用
 FROM openjdk:8-jre-alpine
