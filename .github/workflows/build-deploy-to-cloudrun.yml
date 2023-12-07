@@ -24,9 +24,9 @@ jobs:
         with:
           version: '>= 379.0.0'
           
-#      - name: 'Docker auth'
-#        run: |-
-#          gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev
+      - name: 'Docker auth'
+        run: |-
+          gcloud auth configure-docker asia-northeast1-docker.pkg.dev
       
       - name: 'Build and push container'
         run: |-
