@@ -5,6 +5,9 @@ on:
 jobs:
   build-test-create-dockerimage:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: 'Google auth'
