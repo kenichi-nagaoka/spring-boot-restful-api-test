@@ -7,21 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
+      - name: 'Google auth'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
         with:
-          distribution: 'temurin'          # temurinでJDK8は利用可(oracle等はサポート対象外)
-          java-version: '8'
-      - name: build and test
-        run: mvn test
-  depoy-to-cloudrun:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
+          workload_identity_provider: '${{secrets.WIF_PROVIDER}}' # e.g. - projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+          service_account: '${{secrets.WIF_SERVICE_ACCOUNT}}' # e.g. - my-service-account@my-project.iam.gserviceaccount.com
+          
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
         with:
-          distribution: 'temurin'          # temurinでJDK8は利用可(oracle等はサポート対象外)
-          java-version: '8'
-      - name: build and test
-        run: mvn test
+          project_id: '${{ env.PROJECT_ID }}'
+
+      - name: 'Docker auth'
+        run: |-
+          gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev
+      
+      - name: 'Build and push container'
+        run: |-
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.APP }}/${{ env.APP }}:${{ github.sha }}" ./app
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.APP }}/${{ env.APP }}:${{ github.sha }}"
