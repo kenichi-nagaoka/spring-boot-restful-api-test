@@ -31,4 +31,11 @@ jobs:
       - name: 'Build and push container'
         run: |-
           docker build -t "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}" .
-          docker push "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{ github.sha }}"
+          docker push "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}"
+
+      - name: 'Deploy to Cloud Run'
+        uses: 'google-github-actions/deploy-cloudrun@v0'
+        with:
+          service: spring-boot-restful-api-test
+          region: asia-northeast1
+          image: asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}
