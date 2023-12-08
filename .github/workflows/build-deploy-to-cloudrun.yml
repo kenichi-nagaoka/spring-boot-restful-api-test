@@ -42,6 +42,6 @@ jobs:
           region: ${{env.REGION}}
           image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
-  notify-slack:
-    runs-on: ubuntu-latest
+#  notify-slack:
+ #   runs-on: ubuntu-latest
     
