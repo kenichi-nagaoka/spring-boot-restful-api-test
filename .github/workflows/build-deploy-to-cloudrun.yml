@@ -33,12 +33,12 @@ jobs:
       
       - name: 'Build and push container'
         run: |-
-          docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}" .
-          docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}"
+          docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}" .
+          docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}"
 
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: ${{APP_NAME}}
           region: ${{env.REGION}}
-          image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}
+          image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
