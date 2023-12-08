@@ -26,9 +26,9 @@ jobs:
         with:
           version: '>= 379.0.0'
           
-#      - name: 'Docker auth'
- #       run: |-
-  #        gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
+      - name: 'Docker auth'
+        run: |-
+          gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
       
       - name: 'Build and push container'
         run: |-
@@ -41,3 +41,7 @@ jobs:
           service: ${{env.APP_NAME}}
           region: ${{env.REGION}}
           image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
+    
+  notify-slack:
+    runs-on: ubuntu-latest
+    
