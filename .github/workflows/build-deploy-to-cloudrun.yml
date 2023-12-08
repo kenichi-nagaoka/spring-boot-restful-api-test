@@ -2,15 +2,18 @@ name: build, test and deploy to cloud run
 on:
   issues:
 
+env:
+  ARTIFACT_REGISTRY: github-actions
+  REGION: asia-northeast1
+  APP_NAME: spring-boot-restful-api-test
+
 jobs:
-  build-test-create-dockerimage:
+  build-test-deploy-to-cloudrun:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
-      - name: test secrets
-        run: echo secret "${{secrets.WIF_PROVIDER }}　% ${{secrets.WIF_SERVICE_ACCOUNT }}　% ${{secrets.PROJECT_ID }}" | sed 's/./& /g'
       - uses: actions/checkout@v4
       - name: 'Google auth'
         id: 'auth'
@@ -26,16 +29,16 @@ jobs:
           
       - name: 'Docker auth'
         run: |-
-          gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+          gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
       
       - name: 'Build and push container'
         run: |-
-          docker build -t "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}" .
-          docker push "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}"
+          docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}" .
+          docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}"
 
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
-          service: spring-boot-restful-api-test
-          region: asia-northeast1
-          image: asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}
+          service: ${{APP_NAME}}
+          region: ${{env.REGION}}
+          image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{ARTIFACT_REGISTRY}}/${{APP_NAME}}:${{github.sha}}
