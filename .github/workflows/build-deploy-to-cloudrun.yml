@@ -31,4 +31,5 @@ jobs:
       - name: 'Build and push container'
         run: |-
           docker build -t "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{github.sha}}" .
+          gcloud auth login --no-launch-browser
           docker push "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/github-actions/spring-boot-restful-api-test:${{ github.sha }}"
