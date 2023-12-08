@@ -31,4 +31,4 @@ jobs:
       - name: 'Build and push container'
         run: |-
           docker build -t "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/cloud-run-source-deploy/spring-boot-restful-api-test:${{github.sha}}" .
-          docker push "asdia-northeast1-docker.pkg.dev/phrasal-vent-332015/cloud-run-source-deploy/spring-boot-restful-api-test:${{ github.sha }}"
+          docker push "asia-northeast1-docker.pkg.dev/phrasal-vent-332015/cloud-run-source-deploy/spring-boot-restful-api-test:${{ github.sha }}"
