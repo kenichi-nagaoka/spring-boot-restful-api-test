@@ -42,8 +42,9 @@ jobs:
           region: ${{env.REGION}}
           image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
-  Slack-Notification:
-    name: Send-Notification
+  slack-notification:
+    name: send-notification
+    needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
       - name: Send GitHub Action trigger data to Slack workflow
