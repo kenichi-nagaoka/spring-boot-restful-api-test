@@ -42,6 +42,17 @@ jobs:
           region: ${{env.REGION}}
           image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
-#  notify-slack:
- #   runs-on: ubuntu-latest
-    
+  Slack-Notification:
+    name: Send-Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send GitHub Action trigger data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "Build, Test and Deploy successful."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}  
