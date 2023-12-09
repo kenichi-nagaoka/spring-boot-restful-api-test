@@ -1,7 +1,7 @@
 name: build, test and deploy to cloud run
 on:
-  issues:
-
+  push:
+  
 env:
   ARTIFACT_REGISTRY: github-actions
   REGION: asia-northeast1
