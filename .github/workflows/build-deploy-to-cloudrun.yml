@@ -12,6 +12,7 @@ jobs:
       ARTIFACT_REGISTRY: github-actions
       REGION: asia-northeast1
       APP_NAME: spring-boot-restful-api-test
+      
     steps:
       - uses: actions/checkout@v4
       - name: 'Google auth'
