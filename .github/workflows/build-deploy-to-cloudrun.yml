@@ -2,17 +2,16 @@ name: build, test and deploy to cloud run
 on:
   push:
   
-env:
-  ARTIFACT_REGISTRY: github-actions
-  REGION: asia-northeast1
-  APP_NAME: spring-boot-restful-api-test
-
 jobs:
   build-test-deploy-to-cloudrun:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+    env:
+      ARTIFACT_REGISTRY: github-actions
+      REGION: asia-northeast1
+      APP_NAME: spring-boot-restful-api-test
     steps:
       - uses: actions/checkout@v4
       - name: 'Google auth'
