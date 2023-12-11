@@ -18,17 +18,17 @@ jobs:
       - name: 'Google auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: '${{secrets.WIF_PROVIDER}}'
+          workload_identity_provider: '${{secrets.ｚWIF_PROVIDER}}'
           service_account: '${{secrets.WIF_SERVICE_ACCOUNT}}'
           
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
-        with:
-          version: '>= 379.0.0'
+#      - name: 'Set up Cloud SDK'
+ #       uses: 'google-github-actions/setup-gcloud@v1'
+  #      with:
+   #       version: '>= 379.0.0'
           
-      - name: 'Docker auth'
-        run: |-
-          gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
+#      - name: 'Docker auth'
+ #       run: |-
+  #        gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
       
 #      - name: 'Build and push container'
  #       run: |-
