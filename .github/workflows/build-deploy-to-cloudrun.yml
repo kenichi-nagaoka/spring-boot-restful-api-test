@@ -1,6 +1,5 @@
 name: build, test and deploy to cloud run
-on:
-  push:
+on: [push, workflow_call]
   
 jobs:
   build-test-deploy-to-cloudrun:
