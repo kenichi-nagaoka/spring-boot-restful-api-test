@@ -48,6 +48,8 @@ jobs:
     needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
+      - name: aa
+        run: echo ${{needs.build-test-deploy-to-cloudrun.result}}
       - name: Send GitHub Action trigger data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
