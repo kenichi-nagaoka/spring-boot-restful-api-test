@@ -44,7 +44,7 @@ jobs:
     
   slack-notification:
     name: send-notification
-    if: always()
+#    if: always()
     needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
