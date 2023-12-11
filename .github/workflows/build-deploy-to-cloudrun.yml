@@ -18,29 +18,29 @@ jobs:
       - name: 'Google auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_aprovider: '${{secrets.WIF_PROVIDER}}'
+          workload_identity_provider: '${{secrets.WIF_PROVIDER}}'
           service_account: '${{secrets.WIF_SERVICE_ACCOUNT}}'
           
-#      - name: 'Set up Cloud SDK'
- #       uses: 'google-github-actions/setup-gcloud@v1'
-  #      with:
-   #       version: '>= 379.0.0'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          version: '>= 379.0.0'
           
-#      - name: 'Docker auth'
- #       run: |-
-  #        gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
+      - name: 'Docker auth'
+        run: |-
+          gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
       
-#      - name: 'Build and push container'
- #       run: |-
-  #        docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}" .
-   #       docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}"
+      - name: 'Build and push container'
+        run: |-
+          docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}" .
+          docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}"
 
-#      - name: 'Deploy to Cloud Run'
- #       uses: 'google-github-actions/deploy-cloudrun@v0'
-  #      with:
-   #       service: ${{env.APP_NAME}}
-    #      region: ${{env.REGION}}
-     #     image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
+      - name: 'Deploy to Cloud Run'
+        uses: 'google-github-actions/deploy-cloudrun@v0'
+        with:
+          service: ${{env.APP_NAME}}
+          region: ${{env.REGION}}
+          image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
   slack-notification:
     name: send-notification
@@ -48,7 +48,6 @@ jobs:
     needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{needs.build-test-deploy-to-cloudrun.result}}
       - name: Send GitHub Action trigger data to Slack workflow failure
         if: ${{needs.build-test-deploy-to-cloudrun.result == 'failure'}}
         uses: slackapi/slack-github-action@v1.24.0
