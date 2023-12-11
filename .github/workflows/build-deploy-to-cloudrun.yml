@@ -43,21 +43,24 @@ jobs:
      #     image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
   slack-notification:
+    env:
+      MESSAGE: aaaaa
     name: send-notification
     if: always()
     needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
-      - name: aa
-        run: echo ${{needs.build-test-deploy-to-cloudrun.result}}
+      - run: echo success >>  ${{env.MESSAGE}}
+        if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
+      - run: echo failure >>  ${{env.MESSAGE}}
+        if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'failure'
       - name: Send GitHub Action trigger data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
           payload: |
             {
-              "text": "Build, Test and Deploy successful."
+              "text": "Build, Test and Deploy ${{env.MESSAGE}}."
             }
         env:
           SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}  
