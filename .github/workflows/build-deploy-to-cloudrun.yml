@@ -44,13 +44,14 @@ jobs:
     
   slack-notification:
     name: send-notification
-#    if: always()
+    if: always()
     needs: build-test-deploy-to-cloudrun
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{needs.build-test-deploy-to-cloudrun.result}}
       - name: Send GitHub Action trigger data to Slack workflow failure
-        if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'failure'
+        #if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'failure'
+        if: concontains(${{needs.build-test-deploy-to-cloudrun.result}}, 'failure')
         uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
@@ -60,7 +61,8 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
       - name: Send GitHub Action trigger data to Slack workflow success
-        if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
+       # if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
+        if: concontains(${{needs.build-test-deploy-to-cloudrun.result}}, 'success')
         uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
