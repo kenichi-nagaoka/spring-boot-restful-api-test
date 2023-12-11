@@ -30,17 +30,17 @@ jobs:
         run: |-
           gcloud auth configure-docker ${{env.REGION}}-docker.pkg.dev
       
-      - name: 'Build and push container'
-        run: |-
-          docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}" .
-          docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}"
+#      - name: 'Build and push container'
+ #       run: |-
+  #        docker build -t "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}" .
+   #       docker push "${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}"
 
-      - name: 'Deploy to Cloud Run'
-        uses: 'google-github-actions/deploy-cloudrun@v0'
-        with:
-          service: ${{env.APP_NAME}}
-          region: ${{env.REGION}}
-          image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
+#      - name: 'Deploy to Cloud Run'
+ #       uses: 'google-github-actions/deploy-cloudrun@v0'
+  #      with:
+   #       service: ${{env.APP_NAME}}
+    #      region: ${{env.REGION}}
+     #     image: ${{env.REGION}}-docker.pkg.dev/${{secrets.PROJECT_ID}}/${{env.ARTIFACT_REGISTRY}}/${{env.APP_NAME}}:${{github.sha}}
     
   slack-notification:
     name: send-notification
@@ -54,12 +54,10 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         with:
+          if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
           payload: |
             {
-              if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'success'
               "text": "Build, Test and Deploy successful."
-              if: ${{needs.build-test-deploy-to-cloudrun.result}} == 'failure'
-              "text": "Build, Test and Deploy failure."
             }
         env:
           SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}  
